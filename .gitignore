@@ -60,9 +60,12 @@ src/*_private.*
 src/.idea/
 src/cmake-build*/
 build/
+*.rpx
+*.wuhb
 
 # Visual Studio
 .vs/
+.vscode/
 
 # CMake
 *CMakeCache.txt
