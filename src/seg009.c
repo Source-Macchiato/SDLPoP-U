@@ -416,10 +416,10 @@ static FILE* open_dat_from_root_or_data_dir(const char* filename) {
 	// if failed, try if the DAT file can be opened in the data/ directory, instead of the main folder
 	if (fp == NULL) {
 		char data_path[POP_MAX_PATH];
-		snprintf_check(data_path, sizeof(data_path), "data/%s", filename);
+		snprintf_check(data_path, sizeof(data_path), "/vol/content/%s", filename);
 
 		if (!file_exists(data_path)) {
-			find_first_file_match(data_path, sizeof(data_path), "%s/data/%s", filename);
+			find_first_file_match(data_path, sizeof(data_path), "/vol/content/%s", filename);
 		}
 
 		// verify that this is a regular file and not a directory (otherwise, don't open)
@@ -486,7 +486,7 @@ dat_type* open_dat(const char* filename, int optional) {
 			filename_no_ext[len-4] = '\0'; // terminate, so ".DAT" is deleted from the filename
 		}
 		char foldername[POP_MAX_PATH];
-		snprintf_check(foldername,sizeof(foldername),"data/%s",filename_no_ext);
+		snprintf_check(foldername,sizeof(foldername),"/vol/content/%s",filename_no_ext);
 		const char* data_path = locate_file(foldername);
 		struct stat path_stat;
 		int result = stat(data_path, &path_stat);
@@ -2195,7 +2195,7 @@ const int sound_channel = 0;
 const int max_sound_id = 58;
 
 void load_sound_names() {
-	const char* names_path = locate_file("data/music/names.txt");
+	const char* names_path = locate_file("/vol/content/music/names.txt");
 	if (sound_names != NULL) return;
 	FILE* fp = fopen(names_path,"rt");
 	if (fp==NULL) return;
@@ -2245,7 +2245,7 @@ sound_buffer_type* load_sound(int index) {
 					fp = fopen(filename, "rb");
 				}
 				if (fp == NULL && !skip_normal_data_files) {
-					snprintf_check(filename, sizeof(filename), "data/music/%s.ogg", sound_name(index));
+					snprintf_check(filename, sizeof(filename), "/vol/content/music/%s.ogg", sound_name(index));
 					fp = fopen(locate_file(filename), "rb");
 				}
 				if (fp == NULL) {
@@ -2625,7 +2625,7 @@ void set_gr_mode(byte grmode) {
 #endif
 	}
 
-	SDL_Surface* icon = IMG_Load(locate_file("data/icon.png"));
+	SDL_Surface* icon = IMG_Load(locate_file("/vol/content/icon.png"));
 	if (icon == NULL) {
 		sdlperror("set_gr_mode: Could not load icon");
 	} else {
@@ -2893,7 +2893,7 @@ void load_from_opendats_metadata(int resource_id, const char* extension, FILE** 
 			if (len >= 5 && filename_no_ext[len-4] == '.') {
 				filename_no_ext[len-4] = '\0'; // terminate, so ".DAT" is deleted from the filename
 			}
-			snprintf_check(image_filename,sizeof(image_filename),"data/%s/res%d.%s",filename_no_ext, resource_id, extension);
+			snprintf_check(image_filename,sizeof(image_filename),"/vol/content/%s/res%d.%s",filename_no_ext, resource_id, extension);
 			if (!use_custom_levelset) {
 				//printf("loading (binary) %s",image_filename);
 				fp = fopen(locate_file(image_filename), "rb");
