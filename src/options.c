@@ -475,7 +475,7 @@ void set_options_to_default() {
 	enable_flash = 1;
 	enable_text = 1;
 	enable_info_screen = 1;
-	start_fullscreen = 0;
+	start_fullscreen = 1;
 	use_hardware_acceleration = 2;
 	use_correct_aspect_ratio = 0;
 	use_integer_scaling = 0;
