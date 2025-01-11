@@ -353,9 +353,11 @@ int integer_scaling_possible =
 ;
 
 setting_type visuals_settings[] = {
+	#ifdef __WIIU__
 		{.id = SETTING_FULLSCREEN, .style = SETTING_STYLE_TOGGLE, .linked = &start_fullscreen,
 				.text = "Start fullscreen",
 				.explanation = "Start the game in fullscreen mode.\nYou can also toggle fullscreen by pressing Alt+Enter."},
+	#endif
 		{.id = SETTING_USE_HARDWARE_ACCELERATION, .style = SETTING_STYLE_NUMBER, .number_type = SETTING_BYTE, .max = 2,
 				.linked = &use_hardware_acceleration, .names_list = &use_hardware_acceleration_setting_names_list,
 				.text = "Use hardware acceleration",
