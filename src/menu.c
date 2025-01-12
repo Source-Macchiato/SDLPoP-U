@@ -353,7 +353,7 @@ int integer_scaling_possible =
 ;
 
 setting_type visuals_settings[] = {
-	#ifdef __WIIU__
+	#ifndef __WIIU__
 		{.id = SETTING_FULLSCREEN, .style = SETTING_STYLE_TOGGLE, .linked = &start_fullscreen,
 				.text = "Start fullscreen",
 				.explanation = "Start the game in fullscreen mode.\nYou can also toggle fullscreen by pressing Alt+Enter."},
